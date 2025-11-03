@@ -6,15 +6,16 @@ public class PlayerController : MonoBehaviour
 {
     public int pNum;
     public Rigidbody2D rb;
+
     public float speed;
+    public float jumpForce;
 
     Vector2 dir;
-
+    public bool doJump;
+    public bool grounded;
     //PlayerController controls;
     //Gamepad currentGamepad;
     //Keyboard currentKeyboard;
-
-    InputDevice currentInputDevice;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,26 +25,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-       // currentInputDevice = ;
-       // deviceType = currentInputDevice.device.name;
-        if (currentInputDevice != null)
-        {
-            
-            return;
-           //connected controller
-        }
-        else if (currentInputDevice != null)
-        {
-            return;
-            //connected keybaord
-        }
+          
+
        
     }
 
     private void FixedUpdate()
     {     
         rb.linearVelocityX = dir.x * speed;
+
+        if(doJump == true)
+        {
+            Debug.Log("trying jump");
+            if (grounded == true)
+            {
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            }    
+            doJump = false;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -64,6 +63,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
+    public void Jump(InputAction.CallbackContext context)
+    {
+        doJump = true;
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+        }
+    }
 }
