@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,9 +10,11 @@ public class PlayerController : MonoBehaviour
 
     Vector2 dir;
 
-    public string deviceType;
-    Gamepad currentGamepad;
-    Keyboard currentKeyboard;
+    //PlayerController controls;
+    //Gamepad currentGamepad;
+    //Keyboard currentKeyboard;
+
+    InputDevice currentInputDevice;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,12 +24,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentGamepad = Gamepad.current;
-        if (currentGamepad != null)
+       
+       // currentInputDevice = ;
+       // deviceType = currentInputDevice.device.name;
+        if (currentInputDevice != null)
         {
-            Debug.Log(currentGamepad.name);
+            
             return;
-           //connected device
+           //connected controller
+        }
+        else if (currentInputDevice != null)
+        {
+            return;
+            //connected keybaord
         }
        
     }
@@ -38,6 +48,22 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        dir = currentGamepad.leftStick.ReadValue();
+        Debug.Log(context.control);
+        InputControl control = context.control;
+
+        if (control.device == Gamepad.current)
+        {
+            Gamepad gamepad = (Gamepad)control.device;
+            dir = gamepad.leftStick.ReadValue();
+        }
+        else if (control.device == Keyboard.current)
+        {
+            Keyboard gamepad = (Keyboard)control.device;
+            dir = new Vector2(gamepad.dKey.ReadValue() - gamepad.aKey.ReadValue(), 0);
+        }
+
     }
+
+    
+
 }
