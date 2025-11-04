@@ -33,7 +33,17 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {     
-        rb.linearVelocityX += dir.x * speed;
+        if(grounded)
+        {
+            //ground movement is full accel
+            rb.linearVelocityX += dir.x * speed;
+        }
+        else
+        {
+            //air movement has a slower accel
+            rb.linearVelocityX += dir.x * (speed / 5);
+        }
+
 
         //allow the player to do a break to stop momentum
         if (dir.y <= -0.5f && grounded == true)
