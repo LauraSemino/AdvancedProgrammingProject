@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
 
     public float speed;
+    public float maxSpeed;
     public float jumpForce;
 
     Vector2 dir;
@@ -32,9 +33,25 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {     
-        rb.linearVelocityX = dir.x * speed;
+        rb.linearVelocityX += dir.x * speed;
 
-        if(doJump == true)
+        //allow the player to do a break to stop momentum
+        if (dir.y <= -0.5f && grounded == true)
+        {
+            rb.linearVelocityX = 0f;
+        }
+
+        //caps speed
+        if(rb.linearVelocityX >= maxSpeed)
+        {
+            rb.linearVelocityX = maxSpeed;
+        }
+        if (rb.linearVelocityX <= -maxSpeed)
+        {
+            rb.linearVelocityX = -maxSpeed;
+        }
+
+        if (doJump == true)
         {
             Debug.Log("trying jump");
             if (grounded == true)
@@ -48,18 +65,24 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         Debug.Log(context.control);
-        InputControl control = context.control;
 
-        if (control.device == Gamepad.current)
-        {
-            Gamepad gamepad = (Gamepad)control.device;
-            dir = gamepad.leftStick.ReadValue();
-        }
-        else if (control.device == Keyboard.current)
-        {
-            Keyboard gamepad = (Keyboard)control.device;
-            dir = new Vector2(gamepad.dKey.ReadValue() - gamepad.aKey.ReadValue(), 0);
-        }
+        Vector2 inputVector = context.ReadValue<Vector2>();
+        dir = inputVector;
+
+
+
+        //this is all the old way i made it work, in case i need it for some reason
+        //InputControl control = context.control;
+        /*  if (control.device == Gamepad.current)
+          {
+              Gamepad gamepad = (Gamepad)control.device;
+              dir = gamepad.leftStick.ReadValue();
+          }
+          else if (control.device == Keyboard.current)
+          {
+              Keyboard gamepad = (Keyboard)control.device;
+              dir = new Vector2(gamepad.dKey.ReadValue() - gamepad.aKey.ReadValue(), 0);
+          }*/
 
     }
 
