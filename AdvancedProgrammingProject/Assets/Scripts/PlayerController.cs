@@ -96,7 +96,12 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        doJump = true;
+        //makes sure the jump only happens when held down
+        if (context.performed)
+        {          
+            doJump = true;
+        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
