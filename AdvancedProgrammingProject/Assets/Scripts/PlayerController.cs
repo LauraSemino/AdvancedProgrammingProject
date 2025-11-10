@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     Vector2 dir;
     public bool doJump;
     public bool grounded;
+
+    public RoundManager roundManager;
     //PlayerController controls;
     //Gamepad currentGamepad;
     //Keyboard currentKeyboard;
@@ -118,4 +120,14 @@ public class PlayerController : MonoBehaviour
             grounded = false;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (rb.linearVelocityY < collision.GetComponent<Rigidbody2D>().linearVelocityY && collision.gameObject.CompareTag("Player"))
+        {
+            roundManager.RoundOver(pNum);
+        }
+        
+    }
+
 }
