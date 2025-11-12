@@ -7,7 +7,13 @@ public class MenuScript : MonoBehaviour
     public GameObject pauseMenu;
     void Update()
     {
-        if(isPaused)
+        
+    }  
+
+    public void PauseToggle()
+    {
+        isPaused = !isPaused;
+        if (isPaused)
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
@@ -17,10 +23,5 @@ public class MenuScript : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
         }
-    }  
-
-    public void PauseToggle()
-    {
-        isPaused = !isPaused;
     }
 }

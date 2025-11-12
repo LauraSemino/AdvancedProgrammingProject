@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
@@ -20,6 +21,9 @@ public class RoundManager : MonoBehaviour
 
     public Color RoundColour;
     public Color wonRoundColour;
+
+    public GameObject winScreen;
+    public Camera cam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,7 +47,7 @@ public class RoundManager : MonoBehaviour
         {
             p2wins++;         
         }
-        winner = 0;
+        //winner = 0;
         //check for if won enough rounds here
         StartCoroutine(ScreenFreeze());
         
@@ -70,17 +74,33 @@ public class RoundManager : MonoBehaviour
        if(p1wins >= 5)
        {
             Debug.Log("p1 wins");
+            winScreen.SetActive(true);
+            p2.SetActive(false);
+            cam.transform.position = new Vector3(p1.transform.position.x, p1.transform.position.y, -10);
+            cam.orthographicSize = 2;          
+            Time.timeScale = 0;
             p1wins = 0;
             p2wins = 0;
+
        }
-       if(p2wins >= 5)
+       else if(p2wins >= 5)
        {
             Debug.Log("p2 wins");
+            winScreen.SetActive(true);
+            p1.SetActive(false);
+            cam.transform.position = new Vector3(p2.transform.position.x,p2.transform.position.y,-10);
+            cam.orthographicSize = 2;
+            Time.timeScale = 0;
             p1wins = 0;
             p2wins = 0;
+            
         }
-       p1.transform.position = p1Start.transform.position;
-       p2.transform.position = p2Start.transform.position;            
+       else
+        {
+            p1.transform.position = p1Start.transform.position;
+            p2.transform.position = p2Start.transform.position;
+        }
+                     
     }
 
 }
