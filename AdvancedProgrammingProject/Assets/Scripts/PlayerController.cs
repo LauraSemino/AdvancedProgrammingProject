@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public bool grounded;
 
     public RoundManager roundManager;
+    //public MenuScript menuScript;
     //PlayerController controls;
     //Gamepad currentGamepad;
     //Keyboard currentKeyboard;
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-          
+         
     }
 
     private void FixedUpdate()
@@ -105,6 +106,8 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

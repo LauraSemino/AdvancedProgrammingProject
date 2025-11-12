@@ -70,16 +70,17 @@ public class RoundManager : MonoBehaviour
        if(p1wins >= 5)
        {
             Debug.Log("p1 wins");
+            p1wins = 0;
+            p2wins = 0;
        }
        if(p2wins >= 5)
        {
             Debug.Log("p2 wins");
-       }
+            p1wins = 0;
+            p2wins = 0;
+        }
        p1.transform.position = p1Start.transform.position;
-       p2.transform.position = p2Start.transform.position;
-
-       
-        
+       p2.transform.position = p2Start.transform.position;            
     }
 
 }
