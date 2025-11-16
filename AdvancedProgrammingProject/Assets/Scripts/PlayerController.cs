@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public bool grounded;
 
     public RoundManager roundManager;
+
+    
     //public MenuScript menuScript;
     //PlayerController controls;
     //Gamepad currentGamepad;
@@ -31,10 +33,11 @@ public class PlayerController : MonoBehaviour
     {
          
     }
+   
 
     private void FixedUpdate()
-    {     
-        if(grounded)
+    {
+        if (grounded)
         {
             //ground movement is full accel
             rb.linearVelocityX += dir.x * speed;
@@ -44,7 +47,6 @@ public class PlayerController : MonoBehaviour
             //air movement has a slower accel
             rb.linearVelocityX += dir.x * (speed / 5);
         }
-
 
         //allow the player to do a break to stop momentum
         if (dir.y <= -0.5f && grounded == true)

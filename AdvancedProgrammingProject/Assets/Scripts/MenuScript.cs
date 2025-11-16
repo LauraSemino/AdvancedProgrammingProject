@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MenuScript : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MenuScript : MonoBehaviour
 
     public void PauseToggle()
     {
+
         isPaused = !isPaused;
         if (isPaused)
         {
