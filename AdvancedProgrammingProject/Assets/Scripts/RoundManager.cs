@@ -24,6 +24,8 @@ public class RoundManager : MonoBehaviour
 
     public GameObject winScreen;
     public Camera cam;
+
+    public MenuScript ms;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -63,7 +65,7 @@ public class RoundManager : MonoBehaviour
         {
             p2WinUI[i].gameObject.GetComponent<Image>().color = wonRoundColour;
         }
-        MenuScript.localTimeScale = 0;
+        MenuScript.localTimeScale = ms.gameSpeed;
         yield return new WaitForSecondsRealtime(0.65f);
         MenuScript.localTimeScale = 1;
         RoundReset();

@@ -1754,6 +1754,7 @@ MonoBehaviour:
   wonRoundColour: {r: 1, g: 0.96559095, b: 0, a: 1}
   winScreen: {fileID: 210333409}
   cam: {fileID: 519420031}
+  ms: {fileID: 1392216139}
 --- !u!1 &1121092923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,7 +2768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f744478b3ad412045875a436ddfd1c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPaused: 0
+  gameSpeed: 1
   pauseMenu: {fileID: 251091383}
 --- !u!1 &1429215678
 GameObject:

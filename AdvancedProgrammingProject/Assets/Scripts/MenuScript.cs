@@ -1,11 +1,14 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MenuScript : MonoBehaviour
 {
+    public float gameSpeed;
+
     public static bool isPaused = false;
-    public static float localTimeScale = 1;
+    public static float localTimeScale;
 
     public static float deltaTime
     {
@@ -15,8 +18,12 @@ public class MenuScript : MonoBehaviour
         }
 
     }
-    
     public GameObject pauseMenu;
+
+    private void Start()
+    {
+        localTimeScale = gameSpeed;
+    }
     void Update()
     {
         Debug.Log(deltaTime);
@@ -34,7 +41,7 @@ public class MenuScript : MonoBehaviour
         else
         {
             pauseMenu.SetActive(false);
-            localTimeScale = 1f;
+            localTimeScale = gameSpeed;
         }
     }
 }
