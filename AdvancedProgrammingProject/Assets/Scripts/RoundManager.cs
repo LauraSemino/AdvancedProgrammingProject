@@ -63,9 +63,9 @@ public class RoundManager : MonoBehaviour
         {
             p2WinUI[i].gameObject.GetComponent<Image>().color = wonRoundColour;
         }
-        Time.timeScale = 0;
+        MenuScript.localTimeScale = 0;
         yield return new WaitForSecondsRealtime(0.65f);
-        Time.timeScale = 1;
+        MenuScript.localTimeScale = 1;
         RoundReset();
     }
     public void RoundReset()
@@ -78,7 +78,7 @@ public class RoundManager : MonoBehaviour
             p2.SetActive(false);
             cam.transform.position = new Vector3(p1.transform.position.x, p1.transform.position.y, -10);
             cam.orthographicSize = 2;          
-            Time.timeScale = 0;
+            MenuScript.localTimeScale = 0;
             p1wins = 0;
             p2wins = 0;
 
@@ -90,7 +90,7 @@ public class RoundManager : MonoBehaviour
             p1.SetActive(false);
             cam.transform.position = new Vector3(p2.transform.position.x,p2.transform.position.y,-10);
             cam.orthographicSize = 2;
-            Time.timeScale = 0;
+            MenuScript.localTimeScale = 0;
             p1wins = 0;
             p2wins = 0;
             

@@ -4,11 +4,22 @@ using UnityEngine.InputSystem;
 
 public class MenuScript : MonoBehaviour
 {
-    public bool isPaused = false;
+    public static bool isPaused = false;
+    public static float localTimeScale = 1;
+
+    public static float deltaTime
+    {
+        get
+        {
+            return Time.deltaTime * localTimeScale;
+        }
+
+    }
+    
     public GameObject pauseMenu;
     void Update()
     {
-        
+        Debug.Log(deltaTime);
     }  
 
     public void PauseToggle()
@@ -18,12 +29,12 @@ public class MenuScript : MonoBehaviour
         if (isPaused)
         {
             pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
+            localTimeScale = 0f;
         }
         else
         {
             pauseMenu.SetActive(false);
-            Time.timeScale = 1f;
+            localTimeScale = 1f;
         }
     }
 }

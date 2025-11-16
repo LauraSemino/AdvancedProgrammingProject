@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,64 +26,71 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Physics2D.simulationMode = SimulationMode2D.Script;
     }
 
     // Update is called once per frame
     void Update()
     {
-         
+        //pausing stopping rigidbodies
+        Physics2D.Simulate(MenuScript.deltaTime);
     }
-   
+
 
     private void FixedUpdate()
     {
+        
+
         if (grounded)
-        {
-            //ground movement is full accel
-            rb.linearVelocityX += dir.x * speed;
-        }
-        else
-        {
-            //air movement has a slower accel
-            rb.linearVelocityX += dir.x * (speed / 5);
-        }
-
-        //allow the player to do a break to stop momentum
-        if (dir.y <= -0.5f && grounded == true)
-        {
-            rb.linearVelocityX = 0f;
-        }
-
-        //caps speed
-        if(rb.linearVelocityX >= maxSpeed)
-        {
-            rb.linearVelocityX = maxSpeed;
-        }
-        if (rb.linearVelocityX <= -maxSpeed)
-        {
-            rb.linearVelocityX = -maxSpeed;
-        }
-
-        if (doJump == true)
-        {
-            Debug.Log("trying jump");
-            if (grounded == true)
             {
-                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            }    
-            doJump = false;
-        }
+                //ground movement is full accel
+                rb.linearVelocityX += dir.x * speed;
+            }
+            else
+            {
+                //air movement has a slower accel
+                rb.linearVelocityX += dir.x * (speed / 5);
+            }
+
+            //allow the player to do a break to stop momentum
+            if (dir.y <= -0.5f && grounded == true)
+            {
+                rb.linearVelocityX = 0f;
+            }
+
+            //caps speed
+            if (rb.linearVelocityX >= maxSpeed)
+            {
+                rb.linearVelocityX = maxSpeed;
+            }
+            if (rb.linearVelocityX <= -maxSpeed)
+            {
+                rb.linearVelocityX = -maxSpeed;
+            }
+
+            if (doJump == true)
+            {
+                Debug.Log("trying jump");
+                if (grounded == true)
+                {
+                    rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                }
+                doJump = false;
+            }
+        
+       
     }
 
     public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log(context.control);
+        if (MenuScript.isPaused == false)
+        {
+            Debug.Log(context.control);
 
-        Vector2 inputVector = context.ReadValue<Vector2>();
-        dir = inputVector;
+            Vector2 inputVector = context.ReadValue<Vector2>();
+            dir = inputVector;
 
-
+        }
 
         //this is all the old way i made it work, in case i need it for some reason
         //InputControl control = context.control;
@@ -101,10 +109,13 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        //makes sure the jump only happens when held down
-        if (context.performed)
-        {          
-            doJump = true;
+        if (MenuScript.isPaused == false)
+        {
+            //makes sure the jump only happens when held down
+            if (context.performed)
+            {
+                doJump = true;
+            }
         }
         
     }
