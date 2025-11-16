@@ -65,9 +65,9 @@ public class RoundManager : MonoBehaviour
         {
             p2WinUI[i].gameObject.GetComponent<Image>().color = wonRoundColour;
         }
-        MenuScript.localTimeScale = ms.gameSpeed;
+        MenuScript.localTimeScale = 0;
         yield return new WaitForSecondsRealtime(0.65f);
-        MenuScript.localTimeScale = 1;
+        MenuScript.localTimeScale = ms.gameSpeed;
         RoundReset();
     }
     public void RoundReset()
