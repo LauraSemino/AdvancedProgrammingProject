@@ -7,7 +7,7 @@ public class MenuScript : MonoBehaviour
 {
     public float gameSpeed;
 
-    public static bool isPaused = false;
+    public static bool isPaused;
     public static float localTimeScale;
 
     public static float deltaTime
@@ -20,13 +20,20 @@ public class MenuScript : MonoBehaviour
     }
     public GameObject pauseMenu;
 
+    //menu navigation stuff
+    public GameObject[] menuOptions;
+    public GameObject cursor;
+    public int menuLocation;
+
     private void Start()
     {
         localTimeScale = gameSpeed;
-    }
+        isPaused = false;
+        menuLocation = 0;
+}
     void Update()
     {
-        Debug.Log(deltaTime);
+        //Debug.Log(deltaTime);
     }  
 
     public void PauseToggle()
@@ -35,8 +42,10 @@ public class MenuScript : MonoBehaviour
         isPaused = !isPaused;
         if (isPaused)
         {
+            menuLocation = 0;
+            cursor.transform.position = new Vector2(cursor.transform.position.x, menuOptions[0].transform.position.y - 25);
             pauseMenu.SetActive(true);
-            localTimeScale = 0f;
+            localTimeScale = 0f;  
         }
         else
         {
@@ -44,4 +53,21 @@ public class MenuScript : MonoBehaviour
             localTimeScale = gameSpeed;
         }
     }
+
+    public void MenuNavigation(InputAction.CallbackContext context)
+    {
+        Vector2 inputVector = context.ReadValue<Vector2>();
+        menuLocation -= Mathf.RoundToInt(inputVector.y);
+        if(menuLocation > menuOptions.Length-1)
+        {
+            menuLocation = 0;
+        }
+        if (menuLocation < 0)
+        {
+            menuLocation = menuOptions.Length - 1;
+        }
+        cursor.transform.position = new Vector2(cursor.transform.position.x, menuOptions[menuLocation].transform.position.y - 25);
+
+    }
+
 }

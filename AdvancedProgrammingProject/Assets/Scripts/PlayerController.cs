@@ -34,12 +34,23 @@ public class PlayerController : MonoBehaviour
     {
         //pausing stopping rigidbodies
         Physics2D.Simulate(MenuScript.deltaTime);
+
+        //changes the control scheme between gameplay and UI
+        if (MenuScript.isPaused == true )
+        {
+            GetComponent<PlayerInput>().defaultActionMap = "UI";
+        }
+        if (MenuScript.isPaused == false)
+        {
+            GetComponent<PlayerInput>().defaultActionMap = "Player";
+        }
+        Debug.Log(GetComponent<PlayerInput>().defaultActionMap);
+
     }
 
 
     private void FixedUpdate()
     {
-        
 
         if (grounded)
             {
