@@ -28,12 +28,13 @@ public class MenuScript : MonoBehaviour
     private void Start()
     {
         localTimeScale = gameSpeed;
-        isPaused = false;
+        //isPaused = false;
         menuLocation = 0;
 }
     void Update()
     {
         //Debug.Log(deltaTime);
+       // Debug.Log(isPaused);
     }  
 
     public void PauseToggle()
@@ -56,6 +57,7 @@ public class MenuScript : MonoBehaviour
 
     public void MenuNavigation(InputAction.CallbackContext context)
     {
+        
         Vector2 inputVector = context.ReadValue<Vector2>();
         menuLocation -= Mathf.RoundToInt(inputVector.y);
         if(menuLocation > menuOptions.Length-1)
@@ -67,7 +69,23 @@ public class MenuScript : MonoBehaviour
             menuLocation = menuOptions.Length - 1;
         }
         cursor.transform.position = new Vector2(cursor.transform.position.x, menuOptions[menuLocation].transform.position.y - 25);
+    }
 
+    public void MenuConfirm()
+    {
+        switch(menuLocation)
+        {
+            //resume
+            case 0:
+               // PauseToggle();
+                break;
+            //restart
+            case 1:
+                break;
+            //quit
+            case 2:    
+                break;
+        }
     }
 
 }

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float jumpForce;
 
-    Vector2 dir;
+    public Vector2 dir;
     public bool doJump;
     public bool grounded;
 
@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
+        //GetComponent<PlayerInput>().actions.FindActionMap("UI").Disable();
+        //GetComponent<PlayerInput>().actions.FindActionMap("Player").Disable();
         Physics2D.simulationMode = SimulationMode2D.Script;
     }
 
@@ -38,13 +41,14 @@ public class PlayerController : MonoBehaviour
         //changes the control scheme between gameplay and UI
         if (MenuScript.isPaused == true )
         {
-            GetComponent<PlayerInput>().defaultActionMap = "UI";
+           // GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+            
         }
         if (MenuScript.isPaused == false)
         {
-            GetComponent<PlayerInput>().defaultActionMap = "Player";
+           // GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         }
-        Debug.Log(GetComponent<PlayerInput>().defaultActionMap);
+        //Debug.Log(GetComponent<PlayerInput>().currentActionMap);
 
     }
 
@@ -94,14 +98,14 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        if (MenuScript.isPaused == false)
-        {
-            Debug.Log(context.control);
+       
+           //Debug.Log(context.control);
+
 
             Vector2 inputVector = context.ReadValue<Vector2>();
             dir = inputVector;
 
-        }
+        
 
         //this is all the old way i made it work, in case i need it for some reason
         //InputControl control = context.control;
