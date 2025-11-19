@@ -82,6 +82,7 @@ public class MenuScript : MonoBehaviour
                 break;
             //restart
             case 1:
+                RoundManager.GameReset();
                 Debug.Log("restart");
                 break;
             //quit

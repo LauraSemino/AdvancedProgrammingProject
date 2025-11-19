@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 //using UnityEngine.UIElements;
 
@@ -29,7 +30,8 @@ public class RoundManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        MenuScript.localTimeScale = 1;
+        MenuScript.isPaused = false;
     }
 
     // Update is called once per frame
@@ -73,6 +75,8 @@ public class RoundManager : MonoBehaviour
     public void RoundReset()
     {
        //resets the round
+
+        //win screen
        if(p1wins >= 5)
        {
             Debug.Log("p1 wins");
@@ -83,7 +87,7 @@ public class RoundManager : MonoBehaviour
             MenuScript.localTimeScale = 0;
             p1wins = 0;
             p2wins = 0;
-
+            
        }
        else if(p2wins >= 5)
        {
@@ -104,5 +108,9 @@ public class RoundManager : MonoBehaviour
         }
                      
     }
-
+    public static void GameReset()
+    {
+        MenuScript.localTimeScale = 1;
+        SceneManager.LoadScene("Main");
+    }
 }
