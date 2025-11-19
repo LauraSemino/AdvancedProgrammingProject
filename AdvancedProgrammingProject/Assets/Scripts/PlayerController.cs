@@ -17,8 +17,12 @@ public class PlayerController : MonoBehaviour
     public bool grounded;
 
     public RoundManager roundManager;
+    private InputActionAsset actionAsset;
+    public PlayerInput pi;
 
-    
+    InputActionMap aPlayer;
+    InputActionMap aUI;
+     
     //public MenuScript menuScript;
     //PlayerController controls;
     //Gamepad currentGamepad;
@@ -26,7 +30,13 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        actionAsset = pi.actions;
+        aPlayer = actionAsset.FindActionMap("Player");
+        aUI = actionAsset.FindActionMap("UI");
+
+        aPlayer.Disable();
+        aUI.Disable();
+        //pi.actions
         //GetComponent<PlayerInput>().actions.FindActionMap("UI").Disable();
         //GetComponent<PlayerInput>().actions.FindActionMap("Player").Disable();
         Physics2D.simulationMode = SimulationMode2D.Script;
@@ -39,14 +49,16 @@ public class PlayerController : MonoBehaviour
         Physics2D.Simulate(MenuScript.deltaTime);
 
         //changes the control scheme between gameplay and UI
-        if (MenuScript.isPaused == true )
+        if (MenuScript.isPaused == true)
         {
-           // GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
-            
+            aPlayer.Disable();
+            aUI.Enable();
+
         }
         if (MenuScript.isPaused == false)
         {
-           // GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+            aPlayer.Enable();
+            aUI.Disable();
         }
         //Debug.Log(GetComponent<PlayerInput>().currentActionMap);
 

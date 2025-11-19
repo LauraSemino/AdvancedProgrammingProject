@@ -77,13 +77,16 @@ public class MenuScript : MonoBehaviour
         {
             //resume
             case 0:
-               // PauseToggle();
+                Debug.Log("resume");
+                PauseToggle();
                 break;
             //restart
             case 1:
+                Debug.Log("restart");
                 break;
             //quit
-            case 2:    
+            case 2:
+                Debug.Log("quit");
                 break;
         }
     }
