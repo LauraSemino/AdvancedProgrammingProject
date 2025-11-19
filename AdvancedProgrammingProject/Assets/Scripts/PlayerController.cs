@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     private InputActionAsset actionAsset;
     public PlayerInput pi;
 
-    InputActionMap aPlayer;
-    InputActionMap aUI;
+    public InputActionMap aPlayer;
+    public InputActionMap aUI;
      
     //public MenuScript menuScript;
     //PlayerController controls;

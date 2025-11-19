@@ -26,6 +26,8 @@ public class RoundManager : MonoBehaviour
     public GameObject winScreen;
     public Camera cam;
 
+
+
     public MenuScript ms;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -83,10 +85,11 @@ public class RoundManager : MonoBehaviour
             winScreen.SetActive(true);
             p2.SetActive(false);
             cam.transform.position = new Vector3(p1.transform.position.x, p1.transform.position.y, -10);
-            cam.orthographicSize = 2;          
+            cam.orthographicSize = 2;
+            MenuScript.isPaused = true;
+            ms.curMenu = "Win";
             MenuScript.localTimeScale = 0;
-            p1wins = 0;
-            p2wins = 0;
+  
             
        }
        else if(p2wins >= 5)
@@ -96,9 +99,10 @@ public class RoundManager : MonoBehaviour
             p1.SetActive(false);
             cam.transform.position = new Vector3(p2.transform.position.x,p2.transform.position.y,-10);
             cam.orthographicSize = 2;
+            MenuScript.isPaused = true;
+            ms.curMenu = "Win";
             MenuScript.localTimeScale = 0;
-            p1wins = 0;
-            p2wins = 0;
+           
             
         }
        else

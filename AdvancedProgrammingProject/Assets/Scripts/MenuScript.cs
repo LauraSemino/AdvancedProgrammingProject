@@ -22,37 +22,58 @@ public class MenuScript : MonoBehaviour
 
     //menu navigation stuff
     public GameObject[] menuOptions;
-    public GameObject cursor;
+    public GameObject pCursor;
+    public GameObject wCursor;
+    GameObject curCursor;
+
     public int menuLocation;
+
+    public string curMenu;
+
 
     private void Start()
     {
         localTimeScale = gameSpeed;
         //isPaused = false;
         menuLocation = 0;
+        curMenu = "None";
+        curCursor = pCursor;
 }
     void Update()
     {
+        if (curMenu == "Pause")
+        {
+            curCursor = pCursor;
+        }
+        if (curMenu == "Win")
+        {
+            curCursor = wCursor;
+        }
         //Debug.Log(deltaTime);
-       // Debug.Log(isPaused);
+        // Debug.Log(isPaused);
     }  
 
     public void PauseToggle()
     {
-
-        isPaused = !isPaused;
-        if (isPaused)
+        if(curMenu != "Win")
         {
-            menuLocation = 0;
-            cursor.transform.position = new Vector2(cursor.transform.position.x, menuOptions[0].transform.position.y - 25);
-            pauseMenu.SetActive(true);
-            localTimeScale = 0f;  
+            isPaused = !isPaused;
+            if (isPaused)
+            {
+                curMenu = "Pause";
+                menuLocation = 0;
+                curCursor.transform.position = new Vector2(curCursor.transform.position.x, menuOptions[0].transform.position.y - 25);
+                pauseMenu.SetActive(true);
+                localTimeScale = 0f;
+            }
+            else
+            {
+                curMenu = "None";
+                pauseMenu.SetActive(false);
+                localTimeScale = gameSpeed;
+            }
         }
-        else
-        {
-            pauseMenu.SetActive(false);
-            localTimeScale = gameSpeed;
-        }
+        
     }
 
     public void MenuNavigation(InputAction.CallbackContext context)
@@ -68,27 +89,50 @@ public class MenuScript : MonoBehaviour
         {
             menuLocation = menuOptions.Length - 1;
         }
-        cursor.transform.position = new Vector2(cursor.transform.position.x, menuOptions[menuLocation].transform.position.y - 25);
+        curCursor.transform.position = new Vector2(curCursor.transform.position.x, menuOptions[menuLocation].transform.position.y - 25);
     }
 
     public void MenuConfirm()
     {
-        switch(menuLocation)
+        if(curMenu == "Pause")
         {
-            //resume
-            case 0:
-                Debug.Log("resume");
-                PauseToggle();
-                break;
-            //restart
-            case 1:
-                RoundManager.GameReset();
-                Debug.Log("restart");
-                break;
-            //quit
-            case 2:
-                Debug.Log("quit");
-                break;
+            switch (menuLocation)
+            {
+                //resume
+                case 0:
+                    Debug.Log("resume");
+                    PauseToggle();
+                    break;
+                //restart
+                case 1:
+                    RoundManager.GameReset();
+                    Debug.Log("restart");
+                    break;
+                //quit
+                case 2:
+                    Debug.Log("quit");
+                    break;
+            }
+        }
+        if (curMenu == "Win")
+        {         
+            switch (menuLocation)
+            {
+                //resume
+                case 0:
+                    Debug.Log("resume");
+                    PauseToggle();
+                    break;
+                //restart
+                case 1:
+                    RoundManager.GameReset();
+                    Debug.Log("restart");
+                    break;
+                //quit
+                case 2:
+                    Debug.Log("quit");
+                    break;
+            }
         }
     }
 
