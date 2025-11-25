@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,7 +28,8 @@ public class RoundManager : MonoBehaviour
     public GameObject winScreen;
     public Camera cam;
 
-
+    public float roundTimer;
+    public TextMeshProUGUI roundText;
 
     public MenuScript ms;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,12 +37,20 @@ public class RoundManager : MonoBehaviour
     {
         MenuScript.localTimeScale = 1;
         MenuScript.isPaused = false;
+        roundTimer = 99;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        roundTimer -= Time.deltaTime * MenuScript.localTimeScale;
+        //+1 is added so the timer ends the game when it hits 0 exactly
+        int t = Mathf.FloorToInt(roundTimer) + 1;
+        roundText.text = t.ToString();
+        if(t <= 0)
+        {
+            RoundOver(0);
+        }
     }
 
     public void RoundOver(int winner)
@@ -55,6 +66,7 @@ public class RoundManager : MonoBehaviour
         }
         //winner = 0;
         //check for if won enough rounds here
+       
         StartCoroutine(ScreenFreeze());
         
     }
@@ -107,6 +119,7 @@ public class RoundManager : MonoBehaviour
         }
        else
         {
+            roundTimer = 99;
             p1.transform.position = p1Start.transform.position;
             p2.transform.position = p2Start.transform.position;
         }
