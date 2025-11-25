@@ -23,11 +23,15 @@ public class MenuScript : MonoBehaviour
     //menu navigation stuff
     public GameObject[] menuOptions;
     public GameObject[] winMenuOptions;
-    public GameObject pCursor;
-    public GameObject wCursor;
-    GameObject curCursor;
+    public GameObject p1Cursor;
+    public GameObject w1Cursor;
+    public GameObject p2Cursor;
+    public GameObject w2Cursor;
+    GameObject P1curCursor;
+    GameObject P2curCursor;
 
-    public int menuLocation;
+    public int P1menuLocation;
+    public int P2menuLocation;
 
     public string curMenu;
 
@@ -36,19 +40,22 @@ public class MenuScript : MonoBehaviour
     {
         localTimeScale = gameSpeed;
         //isPaused = false;
-        menuLocation = 0;
+        P1menuLocation = 0;
+        P2menuLocation = 0;
         curMenu = "None";
-        curCursor = pCursor;
+        P1curCursor = p1Cursor;
+        P2curCursor = p2Cursor;
 }
     void Update()
     {
         if (curMenu == "Pause")
         {
-            curCursor = pCursor;
+            P1curCursor = p1Cursor;
+            P2curCursor = p2Cursor;
         }
         if (curMenu == "Win")
         {
-            curCursor = wCursor;
+            P2curCursor = w2Cursor;
            
         }
         //Debug.Log(deltaTime);
@@ -63,8 +70,10 @@ public class MenuScript : MonoBehaviour
             if (isPaused)
             {
                 curMenu = "Pause";
-                menuLocation = 0;
-                curCursor.transform.position = new Vector2(curCursor.transform.position.x, menuOptions[0].transform.position.y - 25);
+                P1menuLocation = 0;
+                P2menuLocation = 0;
+                P1curCursor.transform.position = new Vector2(P1curCursor.transform.position.x, menuOptions[0].transform.position.y - 25);
+                P2curCursor.transform.position = new Vector2(P2curCursor.transform.position.x, menuOptions[0].transform.position.y - 25);
                 pauseMenu.SetActive(true);
                 localTimeScale = 0f;
             }
@@ -78,43 +87,43 @@ public class MenuScript : MonoBehaviour
         
     }
 
-    public void MenuNavigation(InputAction.CallbackContext context)
-    {   
+    public void P1MenuNavigation(InputAction.CallbackContext context)
+    {
         
         Vector2 inputVector = context.ReadValue<Vector2>();
-        menuLocation -= Mathf.RoundToInt(inputVector.y);
+        P1menuLocation -= Mathf.RoundToInt(inputVector.y);
         if (curMenu == "Pause")
         {
-            if (menuLocation > menuOptions.Length - 1)
+            if (P1menuLocation > menuOptions.Length - 1)
             {
-                menuLocation = 0;
+                P1menuLocation = 0;
             }
-            if (menuLocation < 0)
+            if (P1menuLocation < 0)
             {
-                menuLocation = menuOptions.Length - 1;
+                P1menuLocation = menuOptions.Length - 1;
             }
-            curCursor.transform.position = new Vector2(curCursor.transform.position.x, menuOptions[menuLocation].transform.position.y - 25);
+            P1curCursor.transform.position = new Vector2(P1curCursor.transform.position.x, menuOptions[P1menuLocation].transform.position.y - 25);
         }
         else if(curMenu == "Win")
         { 
-            if (menuLocation > winMenuOptions.Length - 1)
+            if (P1menuLocation > winMenuOptions.Length - 1)
             {
-                menuLocation = 0;
+                P1menuLocation = 0;
             }
-            if (menuLocation < 0)
+            if (P1menuLocation < 0)
             {
-                menuLocation = winMenuOptions.Length - 1;
+                P1menuLocation = winMenuOptions.Length - 1;
             }
-            curCursor.transform.position = new Vector2(curCursor.transform.position.x, winMenuOptions[menuLocation].transform.position.y - 25);
+            P1curCursor.transform.position = new Vector2(P1curCursor.transform.position.x, winMenuOptions[P1menuLocation].transform.position.y - 25);
         }
        
     }
 
-    public void MenuConfirm()
+    public void P1MenuConfirm()
     {
         if(curMenu == "Pause")
         {
-            switch (menuLocation)
+            switch (P1menuLocation)
             {
                 //resume
                 case 0:
@@ -134,7 +143,7 @@ public class MenuScript : MonoBehaviour
         }
         if (curMenu == "Win")
         {         
-            switch (menuLocation)
+            switch (P1menuLocation)
             {            
                 //restart
                 case 0:
@@ -149,5 +158,75 @@ public class MenuScript : MonoBehaviour
             }
         }
     }
+    public void P2MenuNavigation(InputAction.CallbackContext context)
+    {
 
+        Vector2 inputVector = context.ReadValue<Vector2>();
+        P2menuLocation -= Mathf.RoundToInt(inputVector.y);
+        if (curMenu == "Pause")
+        {
+            if (P2menuLocation > menuOptions.Length - 1)
+            {
+                P2menuLocation = 0;
+            }
+            if (P2menuLocation < 0)
+            {
+                P2menuLocation = menuOptions.Length - 1;
+            }
+            P2curCursor.transform.position = new Vector2(P2curCursor.transform.position.x, menuOptions[P2menuLocation].transform.position.y - 25);
+        }
+        else if (curMenu == "Win")
+        {
+            if (P2menuLocation > winMenuOptions.Length - 1)
+            {
+                P2menuLocation = 0;
+            }
+            if (P2menuLocation < 0)
+            {
+                P2menuLocation = winMenuOptions.Length - 1;
+            }
+            P2curCursor.transform.position = new Vector2(P1curCursor.transform.position.x, winMenuOptions[P2menuLocation].transform.position.y - 25);
+        }
+
+    }
+
+    public void P2MenuConfirm()
+    {
+        if (curMenu == "Pause")
+        {
+            switch (P2menuLocation)
+            {
+                //resume
+                case 0:
+                    Debug.Log("resume");
+                    PauseToggle();
+                    break;
+                //restart
+                case 1:
+                    RoundManager.GameReset();
+                    Debug.Log("restart");
+                    break;
+                //quit
+                case 2:
+                    RoundManager.QuitToMenu();
+                    break;
+            }
+        }
+        if (curMenu == "Win")
+        {
+            switch (P2menuLocation)
+            {
+                //restart
+                case 0:
+                    RoundManager.GameReset();
+                    Debug.Log("restart");
+                    break;
+                //quit
+                case 1:
+                    RoundManager.QuitToMenu();
+                    Debug.Log("quit");
+                    break;
+            }
+        }
+    }
 }
