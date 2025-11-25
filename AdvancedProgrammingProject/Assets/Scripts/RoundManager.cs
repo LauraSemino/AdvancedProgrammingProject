@@ -30,8 +30,11 @@ public class RoundManager : MonoBehaviour
 
     public float roundTimer;
     public TextMeshProUGUI roundText;
+    public TextMeshProUGUI startText;
 
     public MenuScript ms;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -86,6 +89,14 @@ public class RoundManager : MonoBehaviour
         MenuScript.localTimeScale = ms.gameSpeed;
         RoundReset();
     }
+
+    IEnumerator Countdown()
+    {
+        MenuScript.localTimeScale = 0;
+        yield return new WaitForSecondsRealtime(1f);
+        MenuScript.localTimeScale = ms.gameSpeed;
+
+    }
     public void RoundReset()
     {
        //resets the round
@@ -122,6 +133,7 @@ public class RoundManager : MonoBehaviour
             roundTimer = 99;
             p1.transform.position = p1Start.transform.position;
             p2.transform.position = p2Start.transform.position;
+            
         }
                      
     }
