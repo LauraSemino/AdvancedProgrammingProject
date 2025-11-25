@@ -4159,14 +4159,14 @@ MonoBehaviour:
   roundManager: {fileID: 824748863}
   pi: {fileID: 1883202517}
   aPlayer:
-    m_Name: 
-    m_Id: 
+    m_Name: A Player
+    m_Id: 981e497b-d2fc-4b9c-95f1-b4411a9ab3f9
     m_Asset: {fileID: 0}
     m_Actions: []
     m_Bindings: []
   aUI:
-    m_Name: 
-    m_Id: 
+    m_Name: AUI
+    m_Id: 64776890-500d-4e72-a30e-405f72a541fe
     m_Asset: {fileID: 0}
     m_Actions: []
     m_Bindings: []

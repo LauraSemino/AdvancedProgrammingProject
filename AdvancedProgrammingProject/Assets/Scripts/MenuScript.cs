@@ -79,7 +79,8 @@ public class MenuScript : MonoBehaviour
     }
 
     public void MenuNavigation(InputAction.CallbackContext context)
-    {
+    {   
+        
         Vector2 inputVector = context.ReadValue<Vector2>();
         menuLocation -= Mathf.RoundToInt(inputVector.y);
         if (curMenu == "Pause")
@@ -127,7 +128,7 @@ public class MenuScript : MonoBehaviour
                     break;
                 //quit
                 case 2:
-                    Debug.Log("quit");
+                    RoundManager.QuitToMenu();
                     break;
             }
         }
@@ -142,6 +143,7 @@ public class MenuScript : MonoBehaviour
                     break;
                 //quit
                 case 1:
+                    RoundManager.QuitToMenu();
                     Debug.Log("quit");
                     break;
             }

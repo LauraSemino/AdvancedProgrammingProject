@@ -117,4 +117,9 @@ public class RoundManager : MonoBehaviour
         MenuScript.localTimeScale = 1;
         SceneManager.LoadScene("Main");
     }
+    public static void QuitToMenu()
+    {
+        MenuScript.localTimeScale = 1;
+        SceneManager.LoadScene("Title Screen");
+    }
 }
