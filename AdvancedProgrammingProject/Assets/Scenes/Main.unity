@@ -2000,7 +2000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -100, y: -125}
+  m_AnchoredPosition: {x: -100, y: -225}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1050380237
@@ -3140,6 +3140,9 @@ MonoBehaviour:
   - {fileID: 1137644836}
   - {fileID: 709528630}
   - {fileID: 1138078625}
+  winMenuOptions:
+  - {fileID: 1550073295}
+  - {fileID: 976075331}
   pCursor: {fileID: 1858289257}
   wCursor: {fileID: 1050380235}
   menuLocation: 1
