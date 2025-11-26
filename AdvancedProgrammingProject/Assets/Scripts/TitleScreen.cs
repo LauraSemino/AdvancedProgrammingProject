@@ -11,16 +11,6 @@ public class TitleScreen : MonoBehaviour
     public GameObject p2Cursor;
     public GameObject[] menuOptions;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
 
     public void P1MenuNavigation(InputAction.CallbackContext context)
     {
@@ -45,17 +35,17 @@ public class TitleScreen : MonoBehaviour
         {
             //resume
             case 0:
-                Debug.Log("versus match");
+               // Debug.Log("versus match");
                 SceneManager.LoadScene("Main");
                 break;
             //restart
             case 1:
                 RoundManager.GameReset();
-                Debug.Log("options");
+              //  Debug.Log("options");
                 break;
             //quit
             case 2:
-                Debug.Log("quit");
+              //  Debug.Log("quit");
                 RoundManager.QuitToMenu();
                 break;
         }
@@ -84,17 +74,17 @@ public class TitleScreen : MonoBehaviour
         {
             //resume
             case 0:
-                Debug.Log("versus match");
+              //  Debug.Log("versus match");
                 SceneManager.LoadScene("Main");
                 break;
             //restart
             case 1:
                 
-                Debug.Log("options");
+             //   Debug.Log("options");
                 break;
             //quit
             case 2:
-                Debug.Log("quit");
+             //   Debug.Log("quit");
                 
                 break;
         }

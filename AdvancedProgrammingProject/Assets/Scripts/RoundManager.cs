@@ -104,7 +104,7 @@ public class RoundManager : MonoBehaviour
         //win screen
        if(p1wins >= 5)
        {
-            Debug.Log("p1 wins");
+           // Debug.Log("p1 wins");
             winScreen.SetActive(true);
             p2.SetActive(false);
             cam.transform.position = new Vector3(p1.transform.position.x, p1.transform.position.y, -10);
@@ -117,7 +117,7 @@ public class RoundManager : MonoBehaviour
        }
        else if(p2wins >= 5)
        {
-            Debug.Log("p2 wins");
+            //Debug.Log("p2 wins");
             winScreen.SetActive(true);
             p1.SetActive(false);
             cam.transform.position = new Vector3(p2.transform.position.x,p2.transform.position.y,-10);

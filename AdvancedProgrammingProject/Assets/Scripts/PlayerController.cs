@@ -1,5 +1,4 @@
 using Unity.VisualScripting;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -97,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
             if (doJump == true)
             {
-                Debug.Log("trying jump");
+                //Debug.Log("trying jump");
                 if (grounded == true)
                 {
                     rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
