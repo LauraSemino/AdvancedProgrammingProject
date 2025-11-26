@@ -40,13 +40,11 @@ public class TitleScreen : MonoBehaviour
                 break;
             //restart
             case 1:
-                RoundManager.GameReset();
-              //  Debug.Log("options");
+               
                 break;
             //quit
             case 2:
-              //  Debug.Log("quit");
-                RoundManager.QuitToMenu();
+             
                 break;
         }
 
@@ -80,11 +78,11 @@ public class TitleScreen : MonoBehaviour
             //restart
             case 1:
                 
-             //   Debug.Log("options");
+             
                 break;
             //quit
             case 2:
-             //   Debug.Log("quit");
+            
                 
                 break;
         }
