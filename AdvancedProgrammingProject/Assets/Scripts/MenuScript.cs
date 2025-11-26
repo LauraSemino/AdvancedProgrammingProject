@@ -64,6 +64,10 @@ public class MenuScript : MonoBehaviour
 
     public void PauseToggle()
     {
+        if(RoundManager.canPause == false)
+        {
+            return;
+        }
         if(curMenu != "Win")
         {
             isPaused = !isPaused;
@@ -185,7 +189,7 @@ public class MenuScript : MonoBehaviour
             {
                 P2menuLocation = winMenuOptions.Length - 1;
             }
-            P2curCursor.transform.position = new Vector2(P1curCursor.transform.position.x, winMenuOptions[P2menuLocation].transform.position.y - 25);
+            P2curCursor.transform.position = new Vector2(P2curCursor.transform.position.x, winMenuOptions[P2menuLocation].transform.position.y - 25);
         }
 
     }

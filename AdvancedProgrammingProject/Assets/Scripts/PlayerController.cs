@@ -115,9 +115,7 @@ public class PlayerController : MonoBehaviour
 
             Vector2 inputVector = context.ReadValue<Vector2>();
             dir = inputVector;
-
         
-
         //this is all the old way i made it work, in case i need it for some reason
         //InputControl control = context.control;
         /*  if (control.device == Gamepad.current)
@@ -145,8 +143,6 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-
-    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

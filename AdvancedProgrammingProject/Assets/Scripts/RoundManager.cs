@@ -34,21 +34,24 @@ public class RoundManager : MonoBehaviour
 
     public MenuScript ms;
 
+    public static bool canPause;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //canPause = true;
         MenuScript.localTimeScale = 1;
         MenuScript.isPaused = false;
         roundTimer = 99;
+        StartCoroutine(Countdown());
     }
 
     // Update is called once per frame
     void Update()
     {
-        roundTimer -= Time.deltaTime * MenuScript.localTimeScale;
-        //+1 is added so the timer ends the game when it hits 0 exactly
-        int t = Mathf.FloorToInt(roundTimer) + 1;
+        roundTimer -= (Time.deltaTime * MenuScript.localTimeScale);
+
+        int t = Mathf.FloorToInt(roundTimer);
         roundText.text = t.ToString();
         if(t <= 0)
         {
@@ -58,6 +61,7 @@ public class RoundManager : MonoBehaviour
 
     public void RoundOver(int winner)
     {
+        canPause = false;
         //records round winner
         if (winner == 1)
         {
@@ -69,13 +73,14 @@ public class RoundManager : MonoBehaviour
         }
         //winner = 0;
         //check for if won enough rounds here
-       
+        
         StartCoroutine(ScreenFreeze());
         
     }
 
     IEnumerator ScreenFreeze()
     {
+        
         for (int i = 0; i < p1wins; i++)
         {
             p1WinUI[i].gameObject.GetComponent<Image>().color = wonRoundColour;
@@ -92,10 +97,23 @@ public class RoundManager : MonoBehaviour
 
     IEnumerator Countdown()
     {
+        canPause = false;
+        startText.gameObject.SetActive(true);
+        yield return new WaitForFixedUpdate();
+        startText.text = "Ready";
         MenuScript.localTimeScale = 0;
+        yield return new WaitForSecondsRealtime(0.65f);
+        startText.text = "Ready.";
+        yield return new WaitForSecondsRealtime(0.65f);
+        startText.text = "Ready..";
+        yield return new WaitForSecondsRealtime(0.65f);
+        startText.text = "Ready...";
         yield return new WaitForSecondsRealtime(1f);
+        startText.text = "GO";
         MenuScript.localTimeScale = ms.gameSpeed;
-
+        yield return new WaitForSecondsRealtime(0.5f);
+        startText.enabled = false;
+        canPause = true;
     }
     public void RoundReset()
     {
@@ -112,7 +130,7 @@ public class RoundManager : MonoBehaviour
             MenuScript.isPaused = true;
             ms.curMenu = "Win";
             MenuScript.localTimeScale = 0;
-  
+            
             
        }
        else if(p2wins >= 5)
@@ -130,10 +148,12 @@ public class RoundManager : MonoBehaviour
         }
        else
         {
+            
             roundTimer = 99;
             p1.transform.position = p1Start.transform.position;
             p2.transform.position = p2Start.transform.position;
-            
+            canPause = true;
+
         }
                      
     }
