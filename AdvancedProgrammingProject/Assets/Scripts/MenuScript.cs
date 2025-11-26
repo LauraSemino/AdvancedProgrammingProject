@@ -127,13 +127,13 @@ public class MenuScript : MonoBehaviour
             {
                 //resume
                 case 0:
-                    Debug.Log("resume");
+                    //Debug.Log("resume");
                     PauseToggle();
                     break;
                 //restart
                 case 1:
                     RoundManager.GameReset();
-                    Debug.Log("restart");
+                   // Debug.Log("restart");
                     break;
                 //quit
                 case 2:
@@ -148,19 +148,19 @@ public class MenuScript : MonoBehaviour
                 //restart
                 case 0:
                     RoundManager.GameReset();
-                    Debug.Log("restart");
+                   // Debug.Log("restart");
                     break;
                 //quit
                 case 1:
                     RoundManager.QuitToMenu();
-                    Debug.Log("quit");
+                    //Debug.Log("quit");
                     break;
             }
         }
     }
     public void P2MenuNavigation(InputAction.CallbackContext context)
     {
-
+        
         Vector2 inputVector = context.ReadValue<Vector2>();
         P2menuLocation -= Mathf.RoundToInt(inputVector.y);
         if (curMenu == "Pause")
@@ -198,13 +198,13 @@ public class MenuScript : MonoBehaviour
             {
                 //resume
                 case 0:
-                    Debug.Log("resume");
+                  //  Debug.Log("resume");
                     PauseToggle();
                     break;
                 //restart
                 case 1:
                     RoundManager.GameReset();
-                    Debug.Log("restart");
+               //     Debug.Log("restart");
                     break;
                 //quit
                 case 2:
@@ -219,12 +219,12 @@ public class MenuScript : MonoBehaviour
                 //restart
                 case 0:
                     RoundManager.GameReset();
-                    Debug.Log("restart");
+                //    Debug.Log("restart");
                     break;
                 //quit
                 case 1:
                     RoundManager.QuitToMenu();
-                    Debug.Log("quit");
+                 //   Debug.Log("quit");
                     break;
             }
         }
