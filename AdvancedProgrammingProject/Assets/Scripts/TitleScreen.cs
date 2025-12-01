@@ -212,7 +212,7 @@ public class TitleScreen : MonoBehaviour
                 displaySpeed = "TURBO";
                 break;
             case 1:
-                GameSettings.gameSpeed = 1.25f;
+                GameSettings.gameSpeed = 1.5f;
                 displaySpeed = "SUPER TURBO";           
                 break;
             case 2:
