@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class MenuScript : MonoBehaviour
 {
-    public float gameSpeed;
+   
 
     public static bool isPaused;
     public static float localTimeScale;
@@ -38,7 +38,7 @@ public class MenuScript : MonoBehaviour
 
     private void Start()
     {
-        localTimeScale = gameSpeed;
+        localTimeScale = GameSettings.gameSpeed;
         //isPaused = false;
         P1menuLocation = 0;
         P2menuLocation = 0;
@@ -85,7 +85,7 @@ public class MenuScript : MonoBehaviour
             {
                 curMenu = "None";
                 pauseMenu.SetActive(false);
-                localTimeScale = gameSpeed;
+                localTimeScale = GameSettings.gameSpeed;
             }
         }
         
@@ -232,5 +232,7 @@ public class MenuScript : MonoBehaviour
                     break;
             }
         }
+
+
     }
 }

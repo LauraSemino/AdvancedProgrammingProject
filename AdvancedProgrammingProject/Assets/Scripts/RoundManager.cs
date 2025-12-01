@@ -91,7 +91,7 @@ public class RoundManager : MonoBehaviour
         }
         MenuScript.localTimeScale = 0;
         yield return new WaitForSecondsRealtime(0.65f);
-        MenuScript.localTimeScale = ms.gameSpeed;
+        MenuScript.localTimeScale = GameSettings.gameSpeed;
         RoundReset();
     }
 
@@ -110,7 +110,7 @@ public class RoundManager : MonoBehaviour
         startText.text = "Ready...";
         yield return new WaitForSecondsRealtime(1f);
         startText.text = "GO";
-        MenuScript.localTimeScale = ms.gameSpeed;
+        MenuScript.localTimeScale = GameSettings.gameSpeed;
         yield return new WaitForSecondsRealtime(0.5f);
         startText.enabled = false;
         canPause = true;
