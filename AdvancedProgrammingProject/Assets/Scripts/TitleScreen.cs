@@ -20,6 +20,11 @@ public class TitleScreen : MonoBehaviour
     public float[] speeds;
     float curSpeedOption;
 
+    public string[] stages;
+    float curStageOption;
+
+    
+
     public void Start()
     {
         curSpeedOption = 0;
@@ -87,6 +92,7 @@ public class TitleScreen : MonoBehaviour
                 case 0:
                     // Debug.Log("versus match");
                     SceneManager.LoadScene("Main");
+                   
                     break;
                 //restart
                 case 1:
@@ -109,11 +115,11 @@ public class TitleScreen : MonoBehaviour
                     break;
                 
                 case 1:
-                    LoadMenu("Title");
+                    ChangeStage();
                     break;
                 
                 case 2:
-                    
+                    LoadMenu("Title");
                     break;
             }
         }
@@ -157,6 +163,7 @@ public class TitleScreen : MonoBehaviour
                 case 0:
                     // Debug.Log("versus match");
                     SceneManager.LoadScene("Main");
+                   
                     break;
                 //restart
                 case 1:
@@ -179,11 +186,11 @@ public class TitleScreen : MonoBehaviour
                     break;
 
                 case 1:
-                    LoadMenu("Title");
+                    ChangeStage();
                     break;
 
                 case 2:
-
+                    LoadMenu("Title");
                     break;
             }
         }
@@ -214,5 +221,27 @@ public class TitleScreen : MonoBehaviour
                 break;
         }
         gameOptions[0].GetComponent<TextMeshProUGUI>().text = displaySpeed;
+    }
+
+    public void ChangeStage()
+    {
+        curStageOption += 1;    
+        if (curStageOption > stages.Length - 1)
+        {
+            curStageOption = 0; 
+        }
+        string displayStage = "ALLEY";
+        switch (curStageOption)
+        {
+            case 0:
+                GameSettings.stage = "ALLEY";
+                displayStage = "ALLEY";
+                break;
+            case 1:
+                GameSettings.stage = "PLACEHOLDER";
+                displayStage = "PLACEHOLDER";
+                break;
+        }
+        gameOptions[1].GetComponent<TextMeshProUGUI>().text = displayStage;
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,16 +35,29 @@ public class RoundManager : MonoBehaviour
 
     public MenuScript ms;
 
+    public GameObject[] stages;
+
     public static bool canPause;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        switch (GameSettings.stage)
+        {
+
+            case "ALLEY":
+                Instantiate(stages[0]);
+                break;
+            case "PLACEHOLDER":
+                Instantiate(stages[1]);
+                break;
+        }
         //canPause = true;
         MenuScript.localTimeScale = 1;
         MenuScript.isPaused = false;
         roundTimer = 99;
         StartCoroutine(Countdown());
+
     }
 
     // Update is called once per frame
@@ -147,18 +161,16 @@ public class RoundManager : MonoBehaviour
             
         }
        else
-        {
-            
+        {            
             roundTimer = 99;
             p1.transform.position = p1Start.transform.position;
             p2.transform.position = p2Start.transform.position;
             canPause = true;
-
         }
                      
     }
     public static void GameReset()
-    {
+    { 
         MenuScript.localTimeScale = 1;
         SceneManager.LoadScene("Main");
     }
