@@ -55,8 +55,8 @@ public class MenuScript : MonoBehaviour
         }
         if (curMenu == "Win")
         {
-            P2curCursor = w2Cursor;
-           
+            P1curCursor = w1Cursor;
+            P2curCursor = w2Cursor;     
         }
         //Debug.Log(deltaTime);
         //Debug.Log(isPaused);
